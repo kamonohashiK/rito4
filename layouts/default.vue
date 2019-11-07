@@ -1,8 +1,12 @@
 <template>
   <v-app>
     <Navigation />
-    <v-app-bar fixed app dark color="blue darken-1">
-      <v-toolbar-title v-text="title" />
+    <v-app-bar app dark color="blue darken-1">
+      <v-toolbar-title></v-toolbar-title>
+      <v-autocomplete
+        label="検索"
+        :items="components"
+      ></v-autocomplete>
       <v-spacer />
       <!-- ログイン時:ユーザーのアバターとマイページへのリンク -->
       <v-menu offset-y>
@@ -29,7 +33,8 @@
 </template>
 
 <script>
-import Navigation from '@/components/Navigation.vue'
+import jsonData from '~/assets/index.json'
+import Navigation from "@/components/Navigation.vue";
 
 export default {
   components: {
@@ -37,7 +42,7 @@ export default {
   },
   data() {
     return {
-      title: 'しまの時刻表',
+      title: "しまの時刻表",
       loginDropdown: [
         {
           title: "マイページ",
@@ -47,8 +52,14 @@ export default {
           title: "ログアウト",
           to: "/logout"
         }
-      ]
+      ],
+      components: []
     };
   },
+  created() {
+    jsonData.index_items.forEach(item => {
+      this.components.push(item.search_key)
+    });
+  }
 };
 </script>
