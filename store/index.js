@@ -31,7 +31,7 @@ export const state = () => ({
   departureTime: "",
   arrivalTime: "",
 
-  priceDialog: false
+  priceDialog: false,
 })
 
 export const getters = {
@@ -85,6 +85,11 @@ export const mutations = {
     state.priceDialog = val
   },
 
+  changeMapCenter(state, val) {
+    state.mapState.center = val
+    state.mapState.zoom = 11
+  },
+
   initialize(state) {
     state.mode = 'default'
     state.mapState.focusedIsland = '',
@@ -101,18 +106,19 @@ export const mutations = {
         arrival: ''
       },
       state.timetable = []
-  }
+  },
 }
 
 export const actions = {
   async focusIsland({
     commit,
     state
-  }, id) {
-    var target = state.mapState.markers[id]
+  }, idx) {
+    var target = state.mapState.markers[idx]
 
     await axios.get(process.env.API_ENDPOINT + 'island?island_name=' + target.search_key)
       .then((res) => {
+        commit('changeMapCenter', target.position)
         commit('setIslandData', {
           island_name: target.title,
           from_items: res.data.from_items,

@@ -27,8 +27,8 @@ export default {
     hasTimeTable(val) {
       return val ? 'https://maps.google.com/mapfiles/ms/icons/red-dot.png' : 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
     },
-    selectIsland(id){
-      this.$store.dispatch('focusIsland', id)
+    selectIsland(idx){
+      this.$store.dispatch('focusIsland', idx)
     },
   },
   computed: {

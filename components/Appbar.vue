@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app dark color="blue darken-1">
     <v-toolbar-title></v-toolbar-title>
-    <v-autocomplete label="検索" clearable :items="components"></v-autocomplete>
+    <v-autocomplete v-model="selected" label="検索" clearable :items="islandList" @change="selectIsland"></v-autocomplete>
     <v-spacer />
     <!-- ログイン時:ユーザーのアバターとマイページへのリンク -->
     <v-menu offset-y>
@@ -29,6 +29,7 @@ export default {
   data() {
     return {
       title: "しまの時刻表",
+      selected: '',
       loginDropdown: [
         {
           title: "マイページ",
@@ -39,16 +40,23 @@ export default {
           to: "/logout"
         }
       ],
-      components: []
+      islandList: []
     };
   },
   created() {
     jsonData.index_items.forEach(item => {
-      this.components.push(item.search_key);
+      this.islandList.push(item.search_key);
     });
   },
   computed: {
-    ...mapState(["mapState"])
+    ...mapState(["mapState"]),
+  },
+  methods: {
+    selectIsland(){
+      if(this.selected) {
+        this.$store.dispatch('focusIsland', this.islandList.indexOf(this.selected))
+      }
+    },
   }
 };
 </script>

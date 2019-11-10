@@ -128,7 +128,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <a :href="calendarUrl" target="_blank">
-            <v-btn color="primary darken-1" flat>
+            <v-btn color="primary darken-1">
               <v-icon>mdi-calendar</v-icon> Googleカレンダーに登録
             </v-btn>
           </a>
