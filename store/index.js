@@ -17,13 +17,21 @@ export const state = () => ({
     timetable: false,
     fromPorts: [],
     toPorts: [],
-  }
+    arrivals: []
+  },
+  route: {
+    departure: '',
+    arrival: ''
+  },
+  timetable: []
 })
 
 export const getters = {
   mode: state => state.mode,
   mapState: state => state.mapState,
   navState: state => state.navState,
+  route: state => state.route,
+  timetable: state => state.timetable,
 }
 
 export const mutations = {
@@ -34,6 +42,23 @@ export const mutations = {
     state.navState.fromPorts = val.from_items
     state.navState.toPorts = val.to_items
     state.navState.timetable = val.timetable
+  },
+
+  setDeparture(state, val) {
+    state.route.departure = val
+  },
+
+  setArrival(state, val) {
+    state.route.arrival = val
+  },
+
+  setArrivalPorts(state, val) {
+    state.navState.arrivals = val
+  },
+
+  setTimetable(state, val) {
+    state.timetable = val
+    state.mode = 'timetable'
   }
 }
 
@@ -69,5 +94,25 @@ export const actions = {
         })
       },
     */
+  },
+
+  selectDeparture({commit, state}, val){
+    if (val.fromOrTo == 'from') {
+      commit('setDeparture', state.navState.fromPorts[val.index].name)
+      commit('setArrivalPorts', state.navState.fromPorts[val.index].to)
+    } else {
+      commit('setDeparture', state.navState.toPorts[val.index].name)
+      commit('setArrivalPorts', state.navState.toPorts[val.index].to)
+    }
+  },
+
+  async selectArrival({commit, state}, val) {
+    var arrival = state.navState.arrivals[val.index].name
+    commit('setArrival', arrival)
+    await axios.get(process.env.API_ENDPOINT + 'timetable?dep=' + state.route.departure + val.suffix + '&des=' + state.route.arrival + val.suffix)
+      .then((res) => {
+        commit('setTimetable', res.data.timeTable)
+      })
+      .catch(error => console.log(error))
   }
 }

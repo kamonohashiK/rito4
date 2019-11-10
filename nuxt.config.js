@@ -51,6 +51,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
+    ['@nuxtjs/moment', ['ja']],
   ],
   /*
   ** Axios module configuration
