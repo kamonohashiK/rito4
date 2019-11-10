@@ -5,6 +5,7 @@
       <v-toolbar-title></v-toolbar-title>
       <v-autocomplete
         label="検索"
+        clearable
         :items="components"
       ></v-autocomplete>
       <v-spacer />
@@ -36,6 +37,8 @@
 import jsonData from '~/assets/index.json'
 import Navigation from "@/components/Navigation.vue";
 
+import { mapState, mapGetters } from "vuex";
+
 export default {
   components: {
     Navigation
@@ -60,6 +63,9 @@ export default {
     jsonData.index_items.forEach(item => {
       this.components.push(item.search_key)
     });
+  },
+  computed: {
+    ...mapState(["mapState"])
   }
 };
 </script>
