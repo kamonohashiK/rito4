@@ -23,7 +23,15 @@ export const state = () => ({
     departure: '',
     arrival: ''
   },
-  timetable: []
+  timetable: [],
+  //料金表
+  priceTable: {},
+
+  //カレンダー用に出発時・到着時をセット
+  departureTime: "",
+  arrivalTime: "",
+
+  priceDialog: false
 })
 
 export const getters = {
@@ -37,9 +45,9 @@ export const getters = {
 export const mutations = {
   setIslandData(state, val) {
     state.mode = 'searching',
-    state.mapState.focusedIsland = val.island_name,
-    state.navState.imageUrl = 'dummy.gif',
-    state.navState.fromPorts = val.from_items
+      state.mapState.focusedIsland = val.island_name,
+      state.navState.imageUrl = 'dummy.gif',
+      state.navState.fromPorts = val.from_items
     state.navState.toPorts = val.to_items
     state.navState.timetable = val.timetable
   },
@@ -59,6 +67,40 @@ export const mutations = {
   setTimetable(state, val) {
     state.timetable = val
     state.mode = 'timetable'
+  },
+
+  setPriceTable(state, val) {
+    state.priceTable = val
+  },
+
+  setDepartureTime(state, val) {
+    state.departureTime = val
+  },
+
+  setArrivalTime(state, val) {
+    state.arrivalTime = val
+  },
+
+  changePriceDialogFlag(state, val) {
+    state.priceDialog = val
+  },
+
+  initialize(state) {
+    state.mode = 'default'
+    state.mapState.focusedIsland = '',
+      state.mapState.markers = jsonData.index_items,
+      state.navState = {
+        imageUrl: '',
+        timetable: false,
+        fromPorts: [],
+        toPorts: [],
+        arrivals: []
+      },
+      state.route = {
+        departure: '',
+        arrival: ''
+      },
+      state.timetable = []
   }
 }
 
@@ -96,7 +138,10 @@ export const actions = {
     */
   },
 
-  selectDeparture({commit, state}, val){
+  selectDeparture({
+    commit,
+    state
+  }, val) {
     if (val.fromOrTo == 'from') {
       commit('setDeparture', state.navState.fromPorts[val.index].name)
       commit('setArrivalPorts', state.navState.fromPorts[val.index].to)
@@ -106,7 +151,10 @@ export const actions = {
     }
   },
 
-  async selectArrival({commit, state}, val) {
+  async selectArrival({
+    commit,
+    state
+  }, val) {
     var arrival = state.navState.arrivals[val.index].name
     commit('setArrival', arrival)
     await axios.get(process.env.API_ENDPOINT + 'timetable?dep=' + state.route.departure + val.suffix + '&des=' + state.route.arrival + val.suffix)
@@ -114,5 +162,24 @@ export const actions = {
         commit('setTimetable', res.data.timeTable)
       })
       .catch(error => console.log(error))
+  },
+
+  async getPriceTable({
+    commit
+  }, val) {
+    await axios.get(process.env.API_ENDPOINT + 'pricetable?company=' + val.company + '&sort=' + val.sort)
+      .then((res) => {
+        commit('setPriceTable', res.data.priceTable)
+        commit('setDepartureTime', val.dt)
+        commit('setArrivalTime', val.at)
+        commit('changePriceDialogFlag', true)
+      })
+      .catch(error => console.log(error))
+  },
+
+  initialize({
+    commit
+  }) {
+    commit('initialize')
   }
 }
