@@ -21,6 +21,7 @@ export const state = () => ({
   },
   route: {
     departure: '',
+    departureCoordinate: {},
     arrival: ''
   },
   timetable: [],
@@ -53,7 +54,8 @@ export const mutations = {
   },
 
   setDeparture(state, val) {
-    state.route.departure = val
+    state.route.departure = val.name
+    state.route.departureCoordinate = val.coordinate
   },
 
   setArrival(state, val) {
@@ -88,6 +90,23 @@ export const mutations = {
   changeMapCenter(state, val) {
     state.mapState.center = val
     state.mapState.zoom = 11
+  },
+
+  pushMarker(state, val) {
+    if(state.route.departure != '') {
+      state.mapState.markers = [state.route.departureCoordinate]
+    } else {
+      state.mapState.markers = [{position: state.mapState.center}]
+    }
+    state.mapState.markers.push(val)
+  },
+
+  rollbackMarker(state) {
+    state.mapState.markers = [state.route.departureCoordinate]
+  },
+
+  resetMarker(state) {
+    state.mapState.markers = jsonData.index_items
   },
 
   initialize(state) {
@@ -149,10 +168,10 @@ export const actions = {
     state
   }, val) {
     if (val.fromOrTo == 'from') {
-      commit('setDeparture', state.navState.fromPorts[val.index].name)
+      commit('setDeparture', {name: state.navState.fromPorts[val.index].name, coordinate: {position: state.navState.fromPorts[val.index].position}})
       commit('setArrivalPorts', state.navState.fromPorts[val.index].to)
     } else {
-      commit('setDeparture', state.navState.toPorts[val.index].name)
+      commit('setDeparture', {name: state.navState.toPorts[val.index].name, coordinate: {position: state.navState.toPorts[val.index].position}})
       commit('setArrivalPorts', state.navState.toPorts[val.index].to)
     }
   },

@@ -8,6 +8,8 @@
       :key="item.index"
       link
       @click="selectArrival(index)"
+      @mouseenter="showDirection(item.position)"
+      @mouseleave="resetMarker()"
     >
       <v-list-item-icon>
         <v-icon>mdi-anchor</v-icon>
@@ -30,6 +32,12 @@ export default {
   methods: {
     selectArrival(idx) {
       this.$store.dispatch('selectArrival', {index: idx, suffix: ''})
+    },
+    showDirection(direction) {
+      this.$store.commit('pushMarker', {position: direction})
+    },
+    resetMarker() {
+      this.$store.commit('rollbackMarker')
     }
   }
 };

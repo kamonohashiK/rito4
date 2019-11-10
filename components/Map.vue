@@ -11,8 +11,7 @@
           v-for="(m, index) in mapState.markers"
           :position="m.position"
           :title="m.title"
-          :clickable="true"
-          :icon="hasTimeTable(m.timetable)"
+          :clickable="isClickable()"
           @click="selectIsland(index)"
         />
       </GmapMap>
@@ -24,15 +23,15 @@ import { mapState, mapGetters } from "vuex";
 
 export default {
   methods: {
-    hasTimeTable(val) {
-      return val ? 'https://maps.google.com/mapfiles/ms/icons/red-dot.png' : 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-    },
     selectIsland(idx){
       this.$store.dispatch('focusIsland', idx)
     },
+    isClickable() {
+      return this.route.departure == ''
+    }
   },
   computed: {
-    ...mapGetters(["mapState"])
+    ...mapGetters(["mapState", "route"])
   }
 }
 </script>
