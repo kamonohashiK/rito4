@@ -5,8 +5,18 @@
     </v-list-item-content>
     <v-list-item>
       <v-list-item-content>
-        <v-btn color="green darken-1">時刻表をリクエスト</v-btn>
+        <v-btn color="green lighten-1" @click="sendRequest">時刻表をリクエスト</v-btn>
       </v-list-item-content>
     </v-list-item>
   </v-list>
 </template>
+
+<script>
+export default {
+  methods: {
+    sendRequest(){
+      this.$store.dispatch('sendRequest')
+    }
+  }
+}
+</script>

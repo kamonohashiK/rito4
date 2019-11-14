@@ -5,6 +5,7 @@ export const state = () => ({
   mode: 'default',
   mapState: {
     focusedIsland: '',
+    focusedLocale: '',
     center: {
       lat: 33.865053,
       lng: 132.709476
@@ -18,6 +19,11 @@ export const state = () => ({
     fromPorts: [],
     toPorts: [],
     arrivals: []
+  },
+  snackBarState: {
+    isShown: false,
+    status: '',
+    text: ''
   },
   route: {
     departure: '',
@@ -41,12 +47,14 @@ export const getters = {
   navState: state => state.navState,
   route: state => state.route,
   timetable: state => state.timetable,
+  snackBarState: state => state.snackBarState,
 }
 
 export const mutations = {
   setIslandData(state, val) {
     state.mode = 'searching',
       state.mapState.focusedIsland = val.island_name,
+      state.mapState.focusedLocale = val.locale,
       state.navState.imageUrl = 'dummy.gif',
       state.navState.fromPorts = val.from_items
     state.navState.toPorts = val.to_items
@@ -93,10 +101,12 @@ export const mutations = {
   },
 
   pushMarker(state, val) {
-    if(state.route.departure != '') {
+    if (state.route.departure != '') {
       state.mapState.markers = [state.route.departureCoordinate]
     } else {
-      state.mapState.markers = [{position: state.mapState.center}]
+      state.mapState.markers = [{
+        position: state.mapState.center
+      }]
     }
     state.mapState.markers.push(val)
   },
@@ -107,6 +117,15 @@ export const mutations = {
 
   resetMarker(state) {
     state.mapState.markers = jsonData.index_items
+  },
+
+  changeSnackState(state) {
+    state.snackBarState.isShown = !state.snackBarState.isShown
+  },
+
+  setSnackState(state, val) {
+    state.snackBarState.status = val.status
+    state.snackBarState.text = val.text
   },
 
   initialize(state) {
@@ -140,27 +159,13 @@ export const actions = {
         commit('changeMapCenter', target.position)
         commit('setIslandData', {
           island_name: target.title,
+          locale: target.locale,
           from_items: res.data.from_items,
           to_items: res.data.to_items,
           timetable: target.timetable
         })
       })
       .catch(error => console.log(error))
-    /*
-        commit('changeMapPosition', {
-          position: target.position,
-          zoom: 11
-        })
-        commit('changeFocusedIsland', {
-          name: target.title,
-          locale: target.locale,
-          picture_url: 'https://d1uz5bvy6659fw.cloudfront.net/' + target.search_key + '/' + target.top_img + '.jpg',
-          slide_items: target.slide_items,
-          timetable: target.timetable,
-          search_key: target.search_key
-        })
-      },
-    */
   },
 
   selectDeparture({
@@ -168,10 +173,20 @@ export const actions = {
     state
   }, val) {
     if (val.fromOrTo == 'from') {
-      commit('setDeparture', {name: state.navState.fromPorts[val.index].name, coordinate: {position: state.navState.fromPorts[val.index].position}})
+      commit('setDeparture', {
+        name: state.navState.fromPorts[val.index].name,
+        coordinate: {
+          position: state.navState.fromPorts[val.index].position
+        }
+      })
       commit('setArrivalPorts', state.navState.fromPorts[val.index].to)
     } else {
-      commit('setDeparture', {name: state.navState.toPorts[val.index].name, coordinate: {position: state.navState.toPorts[val.index].position}})
+      commit('setDeparture', {
+        name: state.navState.toPorts[val.index].name,
+        coordinate: {
+          position: state.navState.toPorts[val.index].position
+        }
+      })
       commit('setArrivalPorts', state.navState.toPorts[val.index].to)
     }
   },
@@ -200,6 +215,40 @@ export const actions = {
         commit('changePriceDialogFlag', true)
       })
       .catch(error => console.log(error))
+  },
+
+  sendRequest({
+    commit,
+    state
+  }) {
+    axios.post(process.env.API_ENDPOINT + 'post-info', {
+        island_name: state.mapState.focusedIsland,
+        island_area: state.mapState.focusedLocale,
+        content: 'この島への時刻表リクエストが送信されました。データ集めよう',
+        app_id: 1
+      })
+      .then((res) => {
+        if (res.status == '200') {
+          commit('changeSnackState')
+          commit('setSnackState', {
+            status: 'success',
+            text: 'リクエストを送信しました。'
+          })
+        } else {
+          commit('changeSnackState')
+          commit('setSnackState', {
+            status: 'error',
+            text: 'リクエストの送信に失敗しました。'
+          })
+        }
+      })
+      .catch(error =>
+        commit('setSnackState', {
+          status: 'error',
+          text: 'リクエストの送信に失敗しました。'
+        })
+      )
+      setTimeout(commit('changeSnackState'), 5000)
   },
 
   initialize({
