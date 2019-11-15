@@ -3,7 +3,8 @@
     <v-toolbar-title></v-toolbar-title>
     <v-autocomplete v-model="selected" label="検索" clearable :items="islandList" @change="selectIsland"></v-autocomplete>
     <v-spacer />
-    <!-- ログイン時:ユーザーのアバターとマイページへのリンク -->
+    <!-- ログイン時:ユーザーのアバターとマイページへのリンク(まだ公開しない) -->
+    <!--
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
         <v-btn v-on="on" class="mx-2" fab dark small color="purple">
@@ -18,6 +19,7 @@
         </v-list-item>
       </v-list>
     </v-menu>
+    -->
   </v-app-bar>
 </template>
 

@@ -229,17 +229,17 @@ export const actions = {
       })
       .then((res) => {
         if (res.status == '200') {
-          commit('changeSnackState')
           commit('setSnackState', {
             status: 'success',
             text: 'リクエストを送信しました。'
           })
-        } else {
           commit('changeSnackState')
+        } else {
           commit('setSnackState', {
             status: 'error',
             text: 'リクエストの送信に失敗しました。'
           })
+          commit('changeSnackState')
         }
       })
       .catch(error =>
@@ -248,7 +248,7 @@ export const actions = {
           text: 'リクエストの送信に失敗しました。'
         })
       )
-      setTimeout(commit('changeSnackState'), 5000)
+    setTimeout(commit('changeSnackState'), 5000)
   },
 
   initialize({

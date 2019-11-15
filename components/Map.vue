@@ -1,5 +1,5 @@
 <template>
-  <v-card height="400" style="margin:5px;">
+  <v-card>
       <GmapMap
         :center="mapState.center"
         :zoom="mapState.zoom"

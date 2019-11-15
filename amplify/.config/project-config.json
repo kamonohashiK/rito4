@@ -1,0 +1,17 @@
+{
+    "projectName": "rito4",
+    "version": "2.0",
+    "frontend": "javascript",
+    "javascript": {
+        "framework": "vue",
+        "config": {
+            "SourceDir": "dist",
+            "DistributionDir": "dist",
+            "BuildCommand": "yarn generate",
+            "StartCommand": "yarn start"
+        }
+    },
+    "providers": [
+        "awscloudformation"
+    ]
+}

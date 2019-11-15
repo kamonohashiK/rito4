@@ -1,0 +1,14 @@
+{
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "rito4-prod-20191114223757-authRole",
+            "UnauthRoleArn": "arn:aws:iam::550868644611:role/rito4-prod-20191114223757-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::550868644611:role/rito4-prod-20191114223757-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "rito4-prod-20191114223757-deployment",
+            "UnauthRoleName": "rito4-prod-20191114223757-unauthRole",
+            "StackName": "rito4-prod-20191114223757",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:550868644611:stack/rito4-prod-20191114223757/f87bfec0-06e3-11ea-aee9-0e0b289c0070"
+        }
+    }
+}
