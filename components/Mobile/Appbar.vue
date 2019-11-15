@@ -1,7 +1,19 @@
 <template>
-  <v-app-bar app dark color="blue darken-1">
+  <v-app-bar app flat color="white" height="80">
+    <v-btn class="mx-2" fab dark small color="blue darken-1">
+      <v-icon dark>mdi-app</v-icon>
+    </v-btn>
     <v-toolbar-title></v-toolbar-title>
-    <v-autocomplete v-model="selected" label="検索" clearable :items="islandList" @change="selectIsland" style="margin-top:30px;"></v-autocomplete>
+    <v-autocomplete
+      v-model="selected"
+      label="島名で検索"
+      clearable
+      rounded
+      filled
+      :items="islandList"
+      @change="selectIsland"
+      style="margin-top:30px;"
+    ></v-autocomplete>
     <v-spacer />
     <!-- ログイン時:ユーザーのアバターとマイページへのリンク(まだ公開しない) -->
     <!--
@@ -31,7 +43,7 @@ export default {
   data() {
     return {
       title: "しまの時刻表",
-      selected: '',
+      selected: "",
       loginDropdown: [
         {
           title: "マイページ",
@@ -51,14 +63,17 @@ export default {
     });
   },
   computed: {
-    ...mapState(["mapState"]),
+    ...mapState(["mapState"])
   },
   methods: {
-    selectIsland(){
-      if(this.selected) {
-        this.$store.dispatch('focusIsland', this.islandList.indexOf(this.selected))
+    selectIsland() {
+      if (this.selected) {
+        this.$store.dispatch(
+          "focusIsland",
+          this.islandList.indexOf(this.selected)
+        );
       }
-    },
+    }
   }
 };
 </script>
