@@ -1,16 +1,5 @@
 <template>
-  <v-navigation-drawer
-    app
-    dark
-    v-model="hoge"
-    width="320"
-    color="light-blue darken-1"
-  >
-    <Top />
-    <v-divider></v-divider>
-    <Selector />
-    <v-divider></v-divider>
-
+  <span style="margin-top:100px;">
     <Route
       v-if="
         mode != 'default' && navState.timetable && navState.arrivals.length != 0
@@ -32,7 +21,7 @@
       <ToPorts />
       <FromPorts />
     </span>
-  </v-navigation-drawer>
+  </span>
 </template>
 
 <script>
@@ -58,7 +47,7 @@ export default {
   },
   data() {
     return {
-      hoge: true
+      hoge: false
     }
   },
   computed: {

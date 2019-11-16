@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <Navigation v-if="!$device.isMobile"/>
-    <MobileNav v-if="$device.isMobile"/>
     <MobileAppBar v-if="$device.isMobile" />
     <Appbar v-else />
     <v-content>
@@ -9,6 +8,7 @@
         <nuxt />
       </v-container>
     </v-content>
+    <Footer v-if="$device.isMobile" />
   </v-app>
 </template>
 
@@ -16,11 +16,11 @@
 import Navigation from "@/components/Navigation/Navigation.vue";
 import MobileAppBar from "@/components/Mobile/Appbar.vue"
 import Appbar from "@/components/Appbar.vue";
-import MobileNav from "@/components/Mobile/Navigation.vue";
+import Footer from "@/components/Mobile/Footer.vue"
 
 export default {
   components: {
-    Navigation, MobileAppBar, Appbar, MobileNav
+    Navigation, MobileAppBar, Appbar, Footer
   },
 };
 </script>

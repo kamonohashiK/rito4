@@ -1,8 +1,5 @@
 <template>
   <v-app-bar app flat color="gray" height="80">
-    <v-btn class="mx-2" fab dark small color="blue darken-1">
-      <v-icon>mdi-android</v-icon>
-    </v-btn>
     <v-toolbar-title></v-toolbar-title>
     <v-autocomplete
       v-model="selected"

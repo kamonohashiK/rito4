@@ -14,7 +14,6 @@ export const state = () => ({
     markers: jsonData.index_items,
   },
   navState: {
-    isShown: false,
     imageUrl: '',
     timetable: false,
     fromPorts: [],
@@ -129,8 +128,8 @@ export const mutations = {
     state.snackBarState.text = val.text
   },
 
-  changeNavFlag(state) {
-    state.navState.isShown = !state.navState.isShown
+  changeMode(state, val) {
+    state.mode = val
   },
 
   initialize(state) {
