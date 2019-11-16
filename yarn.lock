@@ -968,6 +968,11 @@
     consola "^2.10.1"
     defu "^0.0.3"
 
+"@nuxtjs/device@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/device/-/device-1.2.3.tgz#0b9c744fef10fa6c9b5d0155c3fbcde2c8dd671f"
+  integrity sha512-VKP8kYL7Ua7BLUStDhnT+N/nv5fta7E7S/aMuMsuWwcDDmlyN+8OCe/jBNAoe6z1LPw2MSiMQYC9VR9mUIZybg==
+
 "@nuxtjs/dotenv@^1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@nuxtjs/dotenv/-/dotenv-1.4.1.tgz#dd5abb98e22cc7ae27139d3aa606151034293128"

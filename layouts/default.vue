@@ -1,14 +1,14 @@
 <template>
   <v-app>
-    <Navigation v-if="!isMobile"/>
-    <MobileAppBar v-if="isMobile" />
+    <Navigation v-if="!$device.isMobile"/>
+    <MobileNav v-if="$device.isMobile"/>
+    <MobileAppBar v-if="$device.isMobile" />
     <Appbar v-else />
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <BottomNav v-if="isMobile" />
   </v-app>
 </template>
 
@@ -16,16 +16,11 @@
 import Navigation from "@/components/Navigation/Navigation.vue";
 import MobileAppBar from "@/components/Mobile/Appbar.vue"
 import Appbar from "@/components/Appbar.vue";
-import BottomNav from "@/components/Mobile/BottomNav.vue";
+import MobileNav from "@/components/Mobile/Navigation.vue";
 
 export default {
-  data() {
-    return {
-      isMobile: true
-    }
-  },
   components: {
-    Navigation, MobileAppBar, Appbar, BottomNav
+    Navigation, MobileAppBar, Appbar, MobileNav
   },
 };
 </script>

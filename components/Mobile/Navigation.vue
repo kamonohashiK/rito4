@@ -2,7 +2,7 @@
   <v-navigation-drawer
     app
     dark
-    permanent
+    v-model="hoge"
     width="320"
     color="light-blue darken-1"
   >
@@ -55,6 +55,11 @@ export default {
     FromPorts,
     ArrivalPorts,
     Route
+  },
+  data() {
+    return {
+      hoge: true
+    }
   },
   computed: {
     ...mapState(["mode", "mapState", "navState", "route"])

@@ -52,6 +52,7 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
     ['@nuxtjs/moment', ['ja']],
+    '@nuxtjs/device',
   ],
   /*
   ** Axios module configuration
