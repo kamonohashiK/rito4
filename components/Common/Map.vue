@@ -39,7 +39,7 @@ export default {
       var innerHeight = window.innerHeight;
       var coefficient = 0.85;
       if (this.$device.isMobile) {
-        coefficient = 0.75;
+        coefficient = 0.70;
       }
       var height = innerHeight * coefficient;
       return `width: 100%; height: ${height}px;`;

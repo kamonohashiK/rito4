@@ -1,10 +1,12 @@
 <template>
-  <v-flex xs12>
-    <Map />
+  <div>
+    <Map v-if="mapVisible" />
     <Timetable />
+    <MobileNav v-if="mode == 'mobile-search'" />
+
     <PriceDialog />
-    <MobileNav />
-  </v-flex>
+    <Snackbar />
+  </div>
 </template>
 
 <script>
@@ -17,18 +19,22 @@ import { mapState, mapGetters } from "vuex";
 
 export default {
   components: {
-    Map, Timetable, PriceDialog, Snackbar, MobileNav
+    Map,
+    Timetable,
+    PriceDialog,
+    Snackbar,
+    MobileNav
   },
   computed: {
     ...mapGetters(["mode"]),
 
     mapVisible() {
-      if (this.mode == 'timetable' || this.mode == 'mobile-search') {
-        return false
+      if (this.mode == "timetable" || this.mode == "mobile-search") {
+        return false;
       } else {
-        return true
+        return true;
       }
-    },
-  },
+    }
+  }
 };
 </script>

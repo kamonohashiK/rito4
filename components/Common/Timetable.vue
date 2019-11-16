@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span v-if="mode == 'timetable'">
     <v-simple-table :headers="headers" :items="timetable" class="elevation-1" hide-default-footer>
       <template v-slot:default>
         <thead>
@@ -58,7 +58,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["timetable"])
+    ...mapState(["timetable", "mode"])
   },
   methods: {
     showPriceTable(comp, sort, dt, at) {
