@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer app permanent dark width="320" color="light-blue darken-1">
+  <v-navigation-drawer app dark width="320" color="light-blue darken-1">
     <Top />
     <v-divider></v-divider>
     <Selector />
