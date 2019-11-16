@@ -33,7 +33,7 @@ export default {
           to: "/logout"
         }
       ],
-      islandList: []
+      islandList: [],
     };
   },
   created() {

@@ -4,7 +4,7 @@
         :center="mapState.center"
         :zoom="mapState.zoom"
         map-type-id="roadmap"
-        style="width: 100%; height: 600px;"
+        :style="mapStyle"
       >
         <GmapMarker
           :key="index"
@@ -31,7 +31,17 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["mapState", "route"])
+    ...mapGetters(["mapState", "route"]),
+
+    mapStyle() {
+      var innerHeight = window.innerHeight
+      var coefficient = 0.85
+      if (this.$device.isMobile) {
+        coefficient = 0.65
+      }
+      var height = innerHeight * coefficient
+      return `width: 100%; height: ${height}px;`
+    },
   }
 }
 </script>

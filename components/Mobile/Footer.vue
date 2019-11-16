@@ -1,9 +1,5 @@
 <template>
-  <v-footer
-    dark
-    padless
-    absolute
-  >
+  <v-footer dark padless absolute>
     <v-card
       flat
       tile
@@ -11,23 +7,29 @@
       style="width:100%;"
     >
       <v-card-text class="white--text" style="font-size:18px;">
-        {{footerText()}}
+        {{ footerText() }}
       </v-card-text>
       <v-divider></v-divider>
 
-      <v-card-text>
-        <v-btn class="mx-5" text disabled>
-        <v-icon>mdi-pencil</v-icon>
-      </v-btn>
-
-      <v-btn class="mx-5" text disabled>
-        <v-icon>mdi-panorama</v-icon>
-      </v-btn>
-
-      <v-btn @click="mobileSearchMode" :color="isControlable(navState.timetable)" :disabled="navState.timetable == false" class="mx-5" text>
-        <v-icon>mdi-clock</v-icon>
-      </v-btn>
-      </v-card-text>
+      <v-card-actions justify-center>
+        <v-spacer></v-spacer>
+        <v-btn text disabled>
+          <v-icon>mdi-pencil</v-icon>
+        </v-btn>
+        <v-spacer></v-spacer>
+        <v-btn text disabled>
+          <v-icon>mdi-panorama</v-icon>
+        </v-btn>
+        <v-spacer></v-spacer>
+        <v-btn
+          @click="mobileSearchMode"
+          :color="isControlable(navState.timetable)"
+          :disabled="navState.timetable == false"
+          text
+        >
+          <v-icon>mdi-clock</v-icon> </v-btn
+        ><v-spacer></v-spacer>
+      </v-card-actions>
     </v-card>
   </v-footer>
 </template>
@@ -41,15 +43,16 @@ export default {
   },
   methods: {
     footerText() {
-      return this.mapState.focusedIsland == '' ? 'しまの時刻表へようこそ！' : this.mapState.focusedIsland + '(' + this.mapState.focusedLocale + ')'
+      return this.mapState.focusedIsland == ""
+        ? "しまの時刻表へようこそ！"
+        : this.mapState.focusedIsland + "(" + this.mapState.focusedLocale + ")";
     },
     isControlable(val) {
-      return val ? 'white' : 'blue darken-2'
+      return val ? "white" : "blue darken-2";
     },
     mobileSearchMode() {
-      this.$store.commit('changeMode', 'mobile-search')
-      console.log(this.mode)
+      this.$store.commit("changeMode", "mobile-search");
     }
   }
-}
+};
 </script>
