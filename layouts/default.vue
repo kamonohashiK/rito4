@@ -15,7 +15,7 @@
 <script>
 import Navigation from "@/components/Navigation/Navigation.vue";
 import MobileAppBar from "@/components/Mobile/Appbar.vue"
-import Appbar from "@/components/Appbar.vue";
+import Appbar from "@/components/Desktop/Appbar.vue";
 import Footer from "@/components/Mobile/Footer.vue"
 
 export default {

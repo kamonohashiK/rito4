@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app flat color="gray" height="80">
+  <v-app-bar app flat height="80">
     <v-toolbar-title></v-toolbar-title>
     <v-autocomplete
       v-model="selected"
@@ -23,16 +23,6 @@ export default {
     return {
       title: "しまの時刻表",
       selected: "",
-      loginDropdown: [
-        {
-          title: "マイページ",
-          to: "/users/1"
-        },
-        {
-          title: "ログアウト",
-          to: "/logout"
-        }
-      ],
       islandList: [],
     };
   },

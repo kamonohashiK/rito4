@@ -1,35 +1,22 @@
 <template>
-  <v-flex xs12>
-    <Map v-if="mapVisible" />
-    <Timetable v-if="mode == 'timetable'"/>
-    <MobileNav v-if="mode == 'mobile-search'"/>
-    <PriceDialog />
-    <Snackbar />
-  </v-flex>
+  <MobileUI v-if="$device.isMobile"/>
+  <DeskTopUI v-else/>
 </template>
 
 <script>
-import Map from '@/components/Map.vue'
-import Timetable from '@/components/Timetable.vue'
-import PriceDialog from '@/components/PriceDialog.vue'
-import Snackbar from '@/components/Snackbar.vue'
-import MobileNav from "@/components/Mobile/Navigation.vue";
-import { mapState, mapGetters } from "vuex"
+import MobileUI from "@/components/MobileUI.vue";
+import DeskTopUI from "@/components/DeskTopUI.vue";
+import axios from 'axios'
 
 export default {
   components: {
-    Map, Timetable, PriceDialog, Snackbar, MobileNav
+    MobileUI, DeskTopUI
   },
-  computed: {
-    ...mapGetters(["mode"]),
-
-    mapVisible() {
-      if (this.mode == 'timetable' || this.mode == 'mobile-search') {
-        return false
-      } else {
-        return true
-      }
-    },
-  },
+  mounted() {
+    //起動時にLambdaを走らせてコールドスタート防止
+    axios.get(process.env.API_ENDPOINT + 'island')
+    axios.get(process.env.API_ENDPOINT + 'timetable')
+    axios.get(process.env.API_ENDPOINT + 'pricetable')
+  }
 };
 </script>
