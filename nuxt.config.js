@@ -53,6 +53,9 @@ export default {
     '@nuxtjs/dotenv',
     ['@nuxtjs/moment', ['ja']],
     '@nuxtjs/device',
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-90339429-5'
+    }],
   ],
   /*
   ** Axios module configuration

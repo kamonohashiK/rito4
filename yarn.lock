@@ -981,6 +981,13 @@
     consola "^2.10.1"
     dotenv "^8.1.0"
 
+"@nuxtjs/google-analytics@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/google-analytics/-/google-analytics-2.2.1.tgz#c5bcf486fe04168d4bb044e6f3fe317d7a3a8d50"
+  integrity sha512-li2Xd9G1v6+wdAiAM+G7USTrQ+/ND/fmf02cKs5IRLbKxba+RHDePKu4s5kvWyrgeczgZRaL+Tm4s24mGDYS6g==
+  dependencies:
+    vue-analytics "^5.17.2"
+
 "@nuxtjs/moment@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@nuxtjs/moment/-/moment-1.4.0.tgz#0c03ca84be97729b6dc03ccfb42655c25d526442"
@@ -7166,6 +7173,11 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
+
+vue-analytics@^5.17.2:
+  version "5.18.0"
+  resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.18.0.tgz#15a4aee44700d6ba3ee0b0dbd98b58154c78c53d"
+  integrity sha512-rnDwx+4mksrwohIxqwJqRVuXotpyKjEPeqMoYveAK3vIp8MiO2BuUfVxELaPFN9/OXFt2ayuQDMParsjWDrNmA==
 
 vue-client-only@^2.0.0:
   version "2.0.0"
