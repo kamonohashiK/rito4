@@ -11,11 +11,10 @@
     ></v-autocomplete>
     <v-spacer />
     <!-- ログイン時:ユーザーのアバターとマイページへのリンク(まだ公開しない) -->
-    <!--
     <v-menu offset-y>
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" class="mx-2" fab dark small color="purple">
-          <v-icon dark>mdi-android</v-icon>
+        <v-btn v-on="on" class="mx-2" fab dark small color="green">
+          <v-icon dark>mdi-island</v-icon>
         </v-btn>
       </template>
       <v-list>
@@ -26,7 +25,6 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    -->
   </v-app-bar>
 </template>
 
@@ -41,13 +39,13 @@ export default {
       selected: "",
       loginDropdown: [
         {
-          title: "マイページ",
-          to: "/users/1"
+          title: "時刻表検索",
+          to: "/"
         },
         {
-          title: "ログアウト",
-          to: "/logout"
-        }
+          title: "しまの時刻表について",
+          to: "/about"
+        },
       ],
       islandList: []
     };
