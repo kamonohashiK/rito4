@@ -9,7 +9,7 @@
       >
       <v-img
         class="white--text"
-        height="230"
+        height="200"
         style="width:100%"
         :src="navState.imageUrl"
         v-if="mode != 'default'"
