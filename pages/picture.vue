@@ -2,8 +2,9 @@
   <v-layout column>
 	<h2>
 		{{mapState.focusedIsland}}の写真
-		<v-btn color="primary">投稿する</v-btn>
+		<!-- <v-btn color="primary">投稿する</v-btn> -->
 	</h2>
+  <!--
     <v-card v-for="d in data" :key="d" flat>
       <v-container>
         <v-row justify="space-between">
@@ -28,6 +29,7 @@
         </v-card-actions>
       </v-container>
     </v-card>
+    -->
   </v-layout>
 </template>
 
