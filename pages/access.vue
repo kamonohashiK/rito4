@@ -1,19 +1,22 @@
 <template>
   <v-layout column>
-    <h2>{{mapState.focusedIsland}}へのアクセス情報</h2>
+    <h2>
+      {{ mapState.focusedIsland }}へのアクセス情報
+      <v-btn color="primary">投稿する</v-btn>
+    </h2>
     <v-card v-for="d in data" :key="d" flat>
       <v-container>
         <v-row justify="space-between">
           <v-col>
             <v-card-text>
               <div class="text--primary">
-                {{d.content}}
+                {{ d.content }}
               </div>
             </v-card-text>
           </v-col>
         </v-row>
         <v-card-actions>
-          <v-icon>mdi-account</v-icon>{{d.postedBy}} {{d.postedAt}}
+          <v-icon>mdi-account</v-icon>{{ d.postedBy }} {{ d.postedAt }}
         </v-card-actions>
       </v-container>
     </v-card>
@@ -27,12 +30,13 @@ export default {
   data() {
     return {
       data: [
-		  {
-			  content: "テキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキストテキスト",
-			  postedBy: "かも屋",
-			  postedAt: "2020/02/02"
-		  }
-	  ]
+        {
+          content:
+            "テキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキストテキスト",
+          postedBy: "かも屋",
+          postedAt: "2020/02/02"
+        }
+      ]
     };
   },
   computed: {
@@ -42,7 +46,11 @@ export default {
 </script>
 
 <style>
-  h2 {
-    color: gray;
-  }
+h2 {
+  color: gray;
+}
+
+.v-btn {
+  margin: 5px;
+}
 </style>

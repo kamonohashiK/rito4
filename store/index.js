@@ -124,8 +124,11 @@ export const mutations = {
   },
 
   setSnackState(state, val) {
-    state.snackBarState.status = val.status
-    state.snackBarState.text = val.text
+    state.snackBarState = {
+      isShown: true,
+      status: val.status,
+      text: val.text
+    }
   },
 
   changeMode(state, val) {
@@ -237,13 +240,17 @@ export const actions = {
             status: 'success',
             text: 'リクエストを送信しました。'
           })
-          commit('changeSnackState')
+          setTimeout(() => {
+            commit('changeSnackState')
+          }, 3000)
         } else {
           commit('setSnackState', {
             status: 'error',
             text: 'リクエストの送信に失敗しました。'
           })
-          commit('changeSnackState')
+          setTimeout(() => {
+            commit('changeSnackState')
+          }, 3000)
         }
       })
       .catch(error =>
@@ -252,7 +259,6 @@ export const actions = {
           text: 'リクエストの送信に失敗しました。'
         })
       )
-    setTimeout(commit('changeSnackState'), 5000)
   },
 
   initialize({
